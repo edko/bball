@@ -1,0 +1,9 @@
+<h2>This is home</h2>
+<div ng-show="currentUser">
+	Welcome {{ currentUser.first_name }}
+	<a ng-href="/#login" ng-click="logout()">Logout</a>
+</div>
+<pre>
+{{ data | json }}
+</pre>
+<button ng-click="addUser()">Add User</button>

@@ -1,4 +1,4 @@
-var app = angular.module('bballapp', ['firebase']);
+var app = angular.module('bballapp', ['ngRoute','firebase']);
 
 // Initialize Firebase
 var config = {
@@ -10,7 +10,31 @@ var config = {
 };
 firebase.initializeApp(config);
 
+app.config(['$routeProvider', function($routeProvider){
+	$routeProvider.
+		when('/login', {
+			templateUrl: 'views/login.html',
+			controller: 'RegistrationController'
+		}).
+		when('/register', {
+			templateUrl: 'views/register.html',
+			controller: 'RegistrationController'
+		}).
+		otherwise({
+			templateUrl: 'views/home.html',
+			controller: 'RegistrationController'
+		});
+}]);
+
 app.controller('FirstController', function($scope, $firebaseObject, $firebaseArray){
 	var ref = firebase.database().ref();
 	$scope.data = $firebaseObject(ref);	
+
+	$scope.addUser = function(){
+		ref.child('users').child('edisonko').push({
+			firstname: 'Edison',
+			lastname: 'Ko',
+			email: 'test@email.com'
+		});
+	};
 });
