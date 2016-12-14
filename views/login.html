@@ -1,19 +1,21 @@
-<form name="loginForm" ng-submit="login()" novalidate>
-	<legend>Login to BBall</legend>
-	<div ng-show="message">{{ message }}</div>
-	<div class="form-group">
-		<label for="">Email</label>
-		<input type="email" class="form-control" name="email" placeholder="Email"
-			ng-model="user.email"
-			ng-required="true">
-	</div>
+<div class="col-xs-12 col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3">
+	<form name="loginForm" ng-submit="login()" novalidate>
+		<legend>Login to BBall</legend>
+		<div ng-show="message">{{ message }}</div>
+		<div class="form-group">
+			<label for="">Email</label>
+			<input type="email" class="form-control" name="email" placeholder="Email"
+				ng-model="user.email"
+				ng-required="true">
+		</div>
 
-	<div class="form-group">
-		<label for="">Password</label>
-		<input type="password" class="form-control" name="password" placeholder="Password"
-			ng-model="user.password"
-			ng-required="true">
-	</div>
+		<div class="form-group">
+			<label for="">Password</label>
+			<input type="password" class="form-control" name="password" placeholder="Password"
+				ng-model="user.password"
+				ng-required="true">
+		</div>
 
-	<button type="submit" class="btn btn-primary" ng-disabled="loginForm.$invalid">Login</button>
-</form>
+		<button type="submit" class="btn btn-primary btn-block btn-lg" ng-disabled="loginForm.$invalid">Login</button>
+	</form>
+</div>

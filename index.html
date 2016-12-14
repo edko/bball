@@ -15,10 +15,15 @@
 			<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.min.js"></script>
 			<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 		<![endif]-->
+		<link rel="stylesheet" type="text/css" href="css/styles.css">
 	</head>
 	<body>
-		<nav class="cf" ng-include="'views/topnav.html'"></nav>
-		<div ng-view></div>	
+		<div class="container-fluid">
+			<div class="row">
+				<nav class="cf" ng-include="'views/topnav.html'"></nav>
+				<div ng-view></div>	
+			</div>
+		</div>
 		
 		<!-- jQuery -->
 		<script src="//code.jquery.com/jquery.js"></script>

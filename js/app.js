@@ -27,14 +27,5 @@ app.config(['$routeProvider', function($routeProvider){
 }]);
 
 app.controller('FirstController', function($scope, $firebaseObject, $firebaseArray){
-	var ref = firebase.database().ref();
-	$scope.data = $firebaseObject(ref);	
-
-	$scope.addUser = function(){
-		ref.child('users').child('edisonko').push({
-			firstname: 'Edison',
-			lastname: 'Ko',
-			email: 'test@email.com'
-		});
-	};
+	
 });
