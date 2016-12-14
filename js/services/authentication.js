@@ -1,6 +1,7 @@
 app.factory('Authentication', ['$rootScope', '$firebaseAuth', '$firebaseObject', '$location',
 	function($rootScope, $firebaseAuth, $firebaseObject, $location){
 		var auth = $firebaseAuth();
+		var ref = firebase.database().ref();
 
 		auth.$onAuthStateChanged(function(authUser){
 			if(authUser){
@@ -33,9 +34,9 @@ app.factory('Authentication', ['$rootScope', '$firebaseAuth', '$firebaseObject',
 							first_name: user.firstname,
 							last_name: user.lastname,
 							email: user.email,
-							mobile: user.mobile,
 							date: firebase.database.ServerValue.TIMESTAMP
 						});
+						myObject.login(user);
 					}).catch(function(error){
 						$rootScope.message = error.message;
 					});

@@ -1,4 +1,4 @@
-app.controller('RegistrationController', ['$scope', 'Authentication', '$firebaseObject',
+app.controller('RegistrationController', ['$scope','Authentication', '$firebaseObject',
 	function($scope, Authentication, $firebaseObject){
 		$scope.register = function(){
 			Authentication.register($scope.user);

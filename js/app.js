@@ -20,6 +20,16 @@ app.config(['$routeProvider', function($routeProvider){
 			templateUrl: 'views/register.html',
 			controller: 'RegistrationController'
 		}).
+		when('/about', {
+			templateUrl: 'views/about.html'
+		}).
+		when('/contact', {
+			templateUrl: 'views/contact.html'
+		}).
+		when('/bballnights', {
+			templateUrl: 'views/bballnights.html',
+			controller: 'BballnightsController'
+		}).
 		otherwise({
 			templateUrl: 'views/home.html',
 			controller: 'RegistrationController'
