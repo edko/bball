@@ -33,6 +33,10 @@ app.config(['$routeProvider', function($routeProvider){
 			templateUrl: 'views/bballnights.html',
 			controller: 'BballnightsController'
 		}).
+		when('/bballnight/:bballnightId/roster', {
+			templateUrl: 'views/roster.html',
+			controller: 'RosterController'
+		}).
 		when('/dash', {
 			templateUrl: 'views/dash.html',
 			controller: 'DashController',
