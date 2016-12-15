@@ -22,7 +22,8 @@ app.controller('BballnightsController', ['$scope', '$rootScope', '$firebaseAuth'
 					balldate = $scope.bballdate.getTime();
 					bballRef.child(balldate).set({
 						bball_date: balldate,
-						timestamp: firebase.database.ServerValue.TIMESTAMP
+						timestamp: firebase.database.ServerValue.TIMESTAMP,
+						counter: 0
 					}).then(function(){
 						$scope.bballdate = '';
 					});

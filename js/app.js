@@ -32,7 +32,7 @@ app.config(['$routeProvider', function($routeProvider){
 		}).
 		otherwise({
 			templateUrl: 'views/home.html',
-			controller: 'RegistrationController'
+			controller: 'HomeController'
 		});
 }]);
 

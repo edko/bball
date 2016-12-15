@@ -19,7 +19,10 @@
 	  <!-- List group -->
 	  <ul class="list-group">
 	    <li class="list-group-item" ng-repeat="(key, ballnight) in ballnights| orderBy: 'bball_date'">
-	    	{{ ballnight.bball_date | date:  'EEE M/dd/yyyy' }}
+	    	<button ng-click="deleteBballNight(key)" class="btn btn-default btn-xs">
+	    		<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+	    	</button>
+	    	{{ ballnight.bball_date | date:  'EEE M/dd/yyyy' }}  	
 	    </li>
 	  </ul>
 	</div>

@@ -1,8 +1,37 @@
-<div ng-show="currentUser">
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-show="currentUser">
 	Welcome {{ currentUser.first_name }}
 	<a ng-href="/#login" ng-click="logout()">Logout</a>
-</div>
+
+
+	<div class="panel panel-default">
+	  <!-- Default panel contents -->
+	  <div class="panel-heading">List of Dates
+			( {{ howManyBballNights }} )
+	  </div>
+	  <!-- List group -->
+	  <div class="table-responsive">
+		  <table class="table table-striped">
+		  	<thead>
+		  		<tr>
+		  			<th>Index</th>
+		  			<th>Date</th>
+		  			<th># of Ballers</th>
+		  			<th></th>
+		  	</thead>
+		  	<tbody>
+		  		<tr ng-repeat="(key, ballnight) in ballnights| orderBy: 'bball_date'">
+		  			<td>{{ key }}
+		  			<td>{{ ballnight.bball_date | date:  'EEE M/dd/yyyy' }} / 10pm-12am</td>
+		  			<td>{{ ballnight.counter }}</td>
+		  			<td><button ng-click="checkin(ballnight.bball_date)">checkin</button></td>
+		  		</tr>
+		  	</tbody>
+
+
+		  </table>
+		</div>
+	</div>
 <pre>
 {{ data | json }}
 </pre>
-<button ng-click="addUser()">Add User</button>
+</div>
