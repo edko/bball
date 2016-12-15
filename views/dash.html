@@ -19,8 +19,10 @@
 					<td>{{ ballnight.bball_date | date:  'EEE M/dd/yyyy' }} / 10pm-12am</td>
 					<td>{{ ballnight.counter }}</td>
 					<td>
-						<button ng-click="checkin(ballnight, currentUser)">checkin</button>
-						<button ng-click="checkout(ballnight, currentUser)">remove me</button></td>
+						<button ng-click="checkin(ballnight, currentUser)">Add me</button>
+						<button ng-click="checkout(ballnight, currentUser)">Remove me</button>
+						<button ng-click="roster()">Roster</button>
+					</td>
 				</tr>
 			</tbody>
 		</table>
