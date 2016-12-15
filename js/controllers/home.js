@@ -4,8 +4,8 @@ app.controller('HomeController', ['$scope', 'Authentication','$rootScope', '$fir
 		var auth = $firebaseAuth();
 		
 
-		auth.$onAuthStateChanged(function(authUser) {
-			if(authUser) {
+		// auth.$onAuthStateChanged(function(authUser) {
+			// if(authUser) {
 				var userRef = firebase.database().ref('users/' + authUser.uid);
 				var userObj = $firebaseObject(userRef);
 				var currentUser = userObj;
@@ -39,12 +39,12 @@ app.controller('HomeController', ['$scope', 'Authentication','$rootScope', '$fir
 					});
 
 					var databaseRef = ref.child('counter');
-        	databaseRef.transaction(function(counter) {
-          	if (counter == 0 || counter < 16) {
-             counter = counter + 1;
-          	}
-          	return counter;
-        	});
+					databaseRef.transaction(function(counter) {
+					if (counter == 0 || counter < 16) {
+						counter = counter + 1;
+					}
+						return counter;
+					});
 				};
 
 				$scope.addBballNight = function(){ 
@@ -60,7 +60,7 @@ app.controller('HomeController', ['$scope', 'Authentication','$rootScope', '$fir
 				$scope.deleteBballNight = function(key){
 					bballInfo.$remove(key);
 				};
-			}
-		});
+			// }
+		// });
 	
 }]);

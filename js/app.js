@@ -12,6 +12,9 @@ firebase.initializeApp(config);
 
 app.config(['$routeProvider', function($routeProvider){
 	$routeProvider.
+		when('/', {
+			redirectTo: '/dash'
+		}).
 		when('/login', {
 			templateUrl: 'views/login.html',
 			controller: 'RegistrationController'
@@ -30,9 +33,17 @@ app.config(['$routeProvider', function($routeProvider){
 			templateUrl: 'views/bballnights.html',
 			controller: 'BballnightsController'
 		}).
+		when('/dash', {
+			templateUrl: 'views/dash.html',
+			controller: 'DashController',
+			resolve: {
+        currentAuth: function(Authentication) {
+          return Authentication.requireAuth();
+        } //current Auth
+      } //resolve
+		}).
 		otherwise({
-			templateUrl: 'views/home.html',
-			controller: 'HomeController'
+			redirectTo: '/login'
 		});
 }]);
 

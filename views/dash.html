@@ -1,0 +1,32 @@
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+	<h2>My Dash</h2>
+	<p>Welcome {{ currentUser.$id }}, {{ message }}</p>
+	<p># of nights is {{ count }}</p>	
+
+	<div class="table-responsive">
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>Index</th>
+					<th>Date and time</th>
+					<th># of Ballers</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="(key, ballnight) in data| orderBy: 'bball_date'">
+					<td>{{ key }}
+					<td>{{ ballnight.bball_date | date:  'EEE M/dd/yyyy' }} / 10pm-12am</td>
+					<td>{{ ballnight.counter }}</td>
+					<td>
+						<button ng-click="checkin(ballnight, currentUser)">checkin</button>
+						<button ng-click="checkout(ballnight, currentUser)">remove me</button></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+</div>
+<pre>
+{{ data | json }}
+</pre>

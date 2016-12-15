@@ -18,7 +18,7 @@ app.factory('Authentication', ['$rootScope', '$firebaseAuth', '$firebaseObject',
 			login: function(user){
 				auth.$signInWithEmailAndPassword(user.email, user.password).
 					then(function(regUser){
-						$location.path('/');
+						$location.path('/dash');
 					}).catch(function(error){
 						$rootScope.message = error.message;
 					});
@@ -26,6 +26,9 @@ app.factory('Authentication', ['$rootScope', '$firebaseAuth', '$firebaseObject',
 			logout: function(){
 				auth.$signOut();
 			},
+			requireAuth: function() {
+				return auth.$requireSignIn();
+			}, //require Authentication
 			register: function(user){
 				auth.$createUserWithEmailAndPassword(user.email, user.password).
 					then(function(regUser){
