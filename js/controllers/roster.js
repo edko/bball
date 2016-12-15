@@ -1,6 +1,6 @@
 app.controller('RosterController', ['$scope', '$firebaseArray', '$routeParams',
 	function($scope, $firebaseArray, $routeParams){
-		$scope.message = "this is the roster page";
+		$scope.message = "Roster page";
 
 		$scope.whichBballNight = $routeParams.bballnightId;
 

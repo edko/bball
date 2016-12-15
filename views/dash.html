@@ -1,32 +1,42 @@
 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-	<h2>My Dash</h2>
-	<p>Welcome {{ currentUser.$id }}, {{ message }}</p>
+	<h3>Welcome {{ currentUser.first_name }}</h3>
 	<p># of nights is {{ count }}</p>	
 
-	<div class="table-responsive">
-		<table class="table table-striped">
-			<thead>
-				<tr>
-					<th>Index</th>
-					<th>Date and time</th>
-					<th># of Ballers</th>
-					<th></th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr ng-repeat="(key, ballnight) in data| orderBy: 'bball_date'">
-					<td>{{ key }}
-					<td>{{ ballnight.bball_date | date:  'EEE M/dd/yyyy' }} / 10pm-12am</td>
-					<td>{{ ballnight.counter }}</td>
-					<td>
-						<button ng-click="checkin(ballnight, currentUser)">Add me</button>
-						<button ng-click="checkout(ballnight, currentUser)">Remove me</button>
-						<a href="#/bballnight/{{ ballnight.bball_date}}/roster">View Roster</a>
 
-					</td>
-				</tr>
-			</tbody>
-		</table>
+	<div class="panel panel-info" ng-repeat="(key, ballnight) in data| orderBy: 'bball_date'">
+		<div class="panel-heading">
+			<h2 class="panel-title">
+				<span class="badge">{{ ballnight.counter }}</span>
+				{{ ballnight.bball_date | date:  'EEE M/dd/yyyy' }}
+				
+			</h2>
+		</div>
+		<div class="panel-body">
+			<p>
+				<a href="#/bballnight/{{ ballnight.bball_date}}/roster">Roster:</a>
+			</p>
+			
+				<span class="label label-primary playername" ng-repeat="player in ballnight.roster">
+					{{ player.first_name }} {{ player.last_name }}
+				</span>
+				
+			
+		</div>
+		<div class="panel-footer">
+			
+			
+			<div class="btn-group btn-group-justified" role="group" aria-label="...">
+			  <div class="btn-group" role="group">
+			    <button type="button" class="btn btn-default" ng-click="checkin(ballnight, currentUser)">Add Me</button>
+			  </div>
+			  <div class="btn-group" role="group">
+			    <button type="button" class="btn btn-default" ng-click="checkout(ballnight, currentUser)">Remove Me</button>
+			  </div>
+			  <div class="btn-group" role="group">
+			    <button type="button" class="btn btn-default">Wailist</button>
+			  </div>
+			</div>
+		</div>
 	</div>
 
 </div>

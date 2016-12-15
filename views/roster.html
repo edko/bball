@@ -1,9 +1,11 @@
-<h2>{{ message }}</h2>
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+	<h3>{{ message }}</h3>
 
-<h3>View Roster for {{ whichBballNight }}</h3>
+	<p>Roster for {{ whichBballNight | date:  'EEE M/dd/yyyy' }}</p>
 
-<ul>
-	<li ng-repeat="baller in ballers">
-		{{ baller.first_name}}
-	</li>
-</ul>
+	<ul>
+		<li ng-repeat="baller in ballers">
+			{{ baller.first_name}} {{ baller.last_name}}
+		</li>
+	</ul>
+</div>

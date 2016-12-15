@@ -36,14 +36,19 @@ app.controller('DashController', ['$scope', '$firebaseObject', '$firebaseArray',
 	// removes user from the roster
 	// todo: need to update count when baller is removed
 	$scope.checkout = function(bballnight, baller){
-		refDel = ref.child(bballnight.bball_date).child('roster').child(baller.$id);
-		$firebaseObject(refDel).$remove();
-		//remove 1 from counter
-		ref.child(bballnight.bball_date).child('counter').transaction(function(counter) {
-			if(counter > 0 && counter < 16) {
-				counter = counter - 1;
+		ref.child(bballnight.bball_date).child('roster').child(baller.$id).once('value', function(snapshot) {
+			var exists = (snapshot.val() !== null);
+			if(exists){
+				refDel = ref.child(bballnight.bball_date).child('roster').child(baller.$id);
+				$firebaseObject(refDel).$remove();
+				//remove 1 from counter
+				ref.child(bballnight.bball_date).child('counter').transaction(function(counter) {
+					if(counter > 0 && counter < 16) {
+						counter = counter - 1;
+					}
+					return counter;
+				});
 			}
-			return counter;
 		});
 	};
 
