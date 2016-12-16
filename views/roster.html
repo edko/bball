@@ -4,8 +4,8 @@
 	<p>Roster for {{ whichBballNight | date:  'EEE M/dd/yyyy' }}</p>
 
 	<ul>
-		<li ng-repeat="baller in ballers">
-			{{ baller.first_name}} {{ baller.last_name}}
+		<li ng-repeat="baller in ballers | orderBy: 'date'">
+			{{ baller.first_name}} {{ baller.last_name}} {{baller.date | date: 'EEE M/dd/yyyy h:mma' }}
 		</li>
 	</ul>
 </div>

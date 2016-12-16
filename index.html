@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 		<title>Bball Web App</title>
 
 		<!-- Bootstrap CSS -->
@@ -18,9 +18,9 @@
 		<link rel="stylesheet" type="text/css" href="css/styles.css">
 	</head>
 	<body>
+		<nav class="cf" ng-include="'views/topnav.html'"></nav>
 		<div class="container-fluid">
-			<div class="row">
-				<nav class="cf" ng-include="'views/topnav.html'"></nav>
+			<div class="row" style="padding-top:40px;">
 				<div ng-view></div>	
 			</div>
 		</div>

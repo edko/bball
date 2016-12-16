@@ -1,7 +1,21 @@
-body {
+ul.ballerslist {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
 }
-.playername {
-	font-weight: normal;
-	font-size: 14px;
-	margin-right: 10px;
+.ballerslist li {
+    float: left;
+    display: block;
+    color: #fff;
+    padding: 3px 10px;
+    background-color: #999999;
+    margin: 0 5px 10px 0;
+    font-size: 16px;
+    
+    /* Border radius for Chrome, Webkit and other good browsers */
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -border-radius: 5px;
+    border-radius: 5px;
 }
