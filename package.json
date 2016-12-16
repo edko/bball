@@ -1,0 +1,18 @@
+{
+  "name": "bball",
+  "version": "0.0.1",
+  "description": "A simple web app to manage bball roster for our weekly open gym.  Using Angular, Firebase, and Bootstrap.",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/edko/bball.git"
+  },
+  "author": "edko",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/edko/bball/issues"
+  },
+  "homepage": "https://github.com/edko/bball#readme"
+}
