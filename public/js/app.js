@@ -1,4 +1,4 @@
-var app = angular.module('bballapp', ['ngRoute','firebase']);
+var app = angular.module('bballapp', ['ngRoute','firebase', 'angular-toArrayFilter']);
 
 // Initialize Firebase
 var config = {

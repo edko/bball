@@ -1,11 +1,38 @@
 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-	<h3>{{ message }}</h3>
+	<h3>Roster for {{ whichBballNight | date:  'EEE M/dd/yyyy' }}</h3>
 
-	<p>Roster for {{ whichBballNight | date:  'EEE M/dd/yyyy' }}</p>
+	<div class="col-md-2">
+		<div class="post">
+			<a ng-href="#/bballnight/{{ ballnight.bball_date }}/roster">
+				<p class="calendar">{{ whichBballNight | date:  'dd' }}<em>{{ whichBballNight | date:  'MMMM' }}</em></p>
+			</a>
+		</div>
+		
+	</div>	
+	
+
+	Roster: {{ rostercount }}
+
+	<ol>
+		<li ng-repeat="baller in roster | orderBy: 'date'">	
+			{{ baller.first_name}} {{ baller.last_name}} updated on {{baller.date | date: 'EEE M/dd/yyyy h:mm a' }}
+		</li>
+	</ol>
+
+	<p>Waiting List : {{ waitlistcount }}</p>
 
 	<ul>
-		<li ng-repeat="baller in ballers | orderBy: 'date'">
-			{{ baller.first_name}} {{ baller.last_name}} {{baller.date | date: 'EEE M/dd/yyyy h:mma' }}
+		<li ng-repeat="waiter in waitlist">
+			{{ waiter.first_name }} {{ waiter.last_name }} updated on {{ waiter.date | date: 'EEE M/dd/yyyy h:mm a'}}
 		</li>
 	</ul>
+	
+	<button type="button" class="btn btn-primary btn-lg" ng-click="checkin()" ng-disabled="rostercount==1">Add Me</button>
+	<button type="button" class="btn btn-danger btn-lg" ng-click="checkout()">Remove Me</button>
+    <button type="button" class="btn btn-warning btn-lg" ng-click="addwaitlist()" ng-disabled="rostercount<1">Waitlist</button>		
+    <button type="button" class="btn btn-warning btn-lg" ng-click="removewaitlist()">Remove Waitlist</button>
 </div>
+
+<pre>
+{{ ballnights | json }}
+</pre>
