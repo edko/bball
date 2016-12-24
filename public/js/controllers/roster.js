@@ -19,27 +19,25 @@ app.controller('RosterController', ['$scope', '$rootScope', '$firebaseArray', '$
 		$scope.roster = $firebaseArray(rosterRef)
 
 		
-		$scope.roster.$loaded().then(function(data) {
-			$scope.rostercount = $scope.roster.length;
-		}); //
+		// $scope.roster.$loaded().then(function(data) {
+		// 	$scope.rostercount = $scope.roster.length;
+		// }); //
 
 		$scope.roster.$watch(function(data) {
         	$scope.rostercount = $scope.roster.length;
         });
 
-        $scope.waitlist.$loaded().then(function(data) {
-			$scope.waitlistcount = $scope.waitlist.length;
-		}); //
+  //       $scope.waitlist.$loaded().then(function(data) {
+		// 	$scope.waitlistcount = $scope.waitlist.length;
+		// }); //
 
 		$scope.waitlist.$watch(function(data) {
         	$scope.waitlistcount = $scope.waitlist.length;
         });
-
 	
-		rosterRef.orderByChild("email").on("child_added", function(snapshot) {
-  			console.log(snapshot.key + " was " + snapshot.val().email + " m tall");
-		});
-
+		// rosterRef.orderByChild("email").on("child_added", function(snapshot) {
+  // 			console.log(snapshot.key + " was " + snapshot.val().email + " m tall");
+		// });
 
 		$scope.checkin = () => {
 			//perform checks before adding baller to the bballnight
@@ -56,16 +54,15 @@ app.controller('RosterController', ['$scope', '$rootScope', '$firebaseArray', '$
 		}
 
 		$scope.addwaitlist = () => {
-			isBallerInRoster().
-				then(function(){
-					isBallerInWaitlist()
-				}).
-				then(function(){
+			isBallerInRoster().then(function(){
+				isBallerInWaitlist().then(function(){
 					addBallerToWaitlist()
-				}).
-				catch((error) => {
+				}).catch((error) => {
 					console.log(error)
 				})
+			}).catch((error) => {
+				console.log(error)
+			}) 
 		}
 
 		$scope.removewaitlist = () => {
@@ -82,23 +79,25 @@ app.controller('RosterController', ['$scope', '$rootScope', '$firebaseArray', '$
 		}
 
 		var addWaitlistToRoster = () => {
-
-			waitlistRef.orderByChild('date').limitToFirst(1).on('child_added', function(snapshot){
-				key = snapshot.getKey()
-			})    
-			// copies waitlist to roster, then deletes waitlist node
-			waitlistRef.child(key).once('value', function(snap){
-				rosterRef.child(key).set(snap.val(), function(error){
-					if(!error){
-						rosterRef.child(key).update({
-							date: firebase.database.ServerValue.TIMESTAMP
-						})
-						waitlistRef.child(key).remove(); 
-					} else if(typeof(console) !== 'undefined' && console.error ) {
-						console.error(error); 
-					}
+			if (checkRosterCount(16) == true) {
+				console.log('will add waitlist to roster')
+				waitlistRef.orderByChild('date').limitToFirst(1).on('child_added', function(snapshot){
+					key = snapshot.getKey()
+				})    
+				// copies waitlist to roster, then deletes waitlist node
+				waitlistRef.child(key).once('value', function(snap){
+					rosterRef.child(key).set(snap.val(), function(error){
+						if(!error){
+							rosterRef.child(key).update({
+								date: firebase.database.ServerValue.TIMESTAMP
+							})
+							waitlistRef.child(key).remove(); 
+						} else if(typeof(console) !== 'undefined' && console.error ) {
+							console.error(error); 
+						}
+					});
 				});
-			});
+			}
 		}
 
 		var addBallerToWaitlist = () => {
@@ -130,9 +129,19 @@ app.controller('RosterController', ['$scope', '$rootScope', '$firebaseArray', '$
 			return new Promise((resolve, reject) => {
 				waitlistRef.child($rootScope.currentUser.$id).once('value').then(function(snapshot){
 					var exists = (snapshot.val() !== null);
+					console.log(exists)
 					exists ? reject('baller in waitlist already') : resolve($rootScope.currentUser)
 				})
 			})
+		}
+
+
+		var checkRosterCount = (maxsize) => {
+			if ($scope.roster.length == (maxsize - 1)) {
+				return true // true if roster is less than max
+			} else { 
+				return false
+			}
 		}
 
 		var addBaller =  (baller) => {
@@ -156,15 +165,11 @@ app.controller('RosterController', ['$scope', '$rootScope', '$firebaseArray', '$
 			userDelRef = userRef.child(baller.$id).child('mybballnights').child($scope.whichBballNight);
 			$firebaseObject(refDel).$remove().then(() => {
 				$firebaseObject(userDelRef).$remove();
+			}).then(() => {
+				addWaitlistToRoster()
 			}).catch((error) => {
 				console.log(error);
 			});
-			if ($scope.rostercount < 4) {
-				console.log($scope.rostercount)
-				addWaitlistToRoster()
-			}
-			
-			// need to check if count is 15, if yes, then add waitlist to roster
 
 		}
 		

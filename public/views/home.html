@@ -1,4 +1,4 @@
-<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-show="currentUser">
+<div ng-show="currentUser">
 	Welcome {{ currentUser.first_name }}
 	<a ng-href="/#login" ng-click="logout()">Logout</a>
 
@@ -31,7 +31,5 @@
 		  </table>
 		</div>
 	</div>
-<pre>
-{{ data | json }}
-</pre>
+
 </div>
