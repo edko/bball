@@ -3,19 +3,32 @@
 </div>
 
 
-<div class="row" ng-repeat="ballnight in data">
-	<div class="col-md-2">
+<div class="row" style="margin-bottom:10px;" ng-repeat="ballnight in data">
+	<div class="col-md-1 col-sm-2 col-xs-3">
 		<div class="post">
 			<a ng-href="#/bballnight/{{ ballnight.bball_date }}/roster">
 				<p class="calendar">{{ ballnight.bball_date | date:  'dd' }}<em>{{ ballnight.bball_date | date:  'MMMM' }}</em></p>
 			</a>
 		</div>	
 	</div>
-	<div class="col-md-10" ng-controller="BallNightDetailController">
-		Roster: {{ rostercount }}
-		Waitlist: {{ waitlistcount}}
-
-		<span class="label label-primary" ng-repeat="player in rosterlist | orderBy: 'date'">{{ player.first_name }} {{ player.last_name }}</span>
-
+	<div class="col-md-6 col-sm-10 col-xs-9" ng-controller="BallNightDetailController">
+		<div class="container">
+			<div class="col-md-3 col-sm-5 col-xs-5">
+				{{ rostercount }}
+				waitlist - {{ waitlistcount }}
+			</div>
+			<div class="col-md-3 col-sm-5 col-xs-5">
+				<button class="btn btn-success btn-lg">
+					<span class="glyphicon glyphicon-ok-sign"></span> ADD ME</button>
+				<button class="btn btn-danger btn-lg">
+					<span class="glyphicon glyphicon-remove-sign"></span> REMOVE</button>
+				<button class="btn btn-warning btn-lg">
+					<span class="glyphicon glyphicon-time"></span> WAITLIST</button>
+			</div>
+			<div ng-include="templateURL"></div>
+			
+			
+		</div>
+		
 	</div>		
 </div>

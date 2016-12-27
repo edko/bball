@@ -1,4 +1,4 @@
-var app = angular.module('bballapp', ['ngRoute','firebase']);
+var app = angular.module('bballapp', ['ui.router','firebase']);
 
 // Initialize Firebase
 var config = {
@@ -10,57 +10,58 @@ var config = {
 };
 firebase.initializeApp(config);
 
-app.run(['$rootScope', '$location', function($rootScope, $location) {
-  $rootScope.$on('$routeChangeError',
-    function(event, next, previous, error) {
-      if (error=='AUTH_REQUIRED') {
-        $rootScope.message = 'Sorry, you must log in to access that page';
-        $location.path('/login');
-      } // AUTH REQUIRED
+app.run(['$rootScope', '$state', function($rootScope, $state) {
+	$rootScope.$on('$stateChangeError', function(event, toState, toParams, fromState, fromParams, error) {
+		if (error=='AUTH_REQUIRED') {
+        	$rootScope.message = 'Sorry, you must log in to access that page';
+        	$state.go('login');
+      	} // AUTH REQUIRED
     }); //event info
 }]); //run
 
-app.config(['$routeProvider', function($routeProvider){
-	$routeProvider.
-		when('/', {
-			redirectTo: '/dash'
-		}).
-		when('/login', {
+app.config(['$urlRouterProvider', '$stateProvider', function($urlRouterProvider, $stateProvider){
+	
+	$urlRouterProvider.otherwise('/dash')
+
+	$stateProvider
+		.state('login', {
+			url: '/login',
 			templateUrl: 'views/login.html',
 			controller: 'RegistrationController'
-		}).
-		when('/register', {
+		})
+		.state('register', {
+			url: '/register',
 			templateUrl: 'views/register.html',
 			controller: 'RegistrationController'
-		}).
-		when('/about', {
-			templateUrl: 'views/about.html'
-		}).
-		when('/contact', {
-			templateUrl: 'views/contact.html'
-		}).
-		when('/bballnights', {
-			templateUrl: 'views/bballnights.html',
-			controller: 'BballnightsController'
-		}).
-		when('/bballnight/:bballnightId/roster', {
-			templateUrl: 'views/roster.html',
-			controller: 'RosterController'
-		}).
-		when('/dash', {
+		})
+		.state('dash', {
+			url: '/dash',
 			templateUrl: 'views/dash.html',
 			controller: 'DashController',
 			resolve: {
-        currentAuth: function(Authentication) {
-          return Authentication.requireAuth();
-        } //current Auth
-      } //resolve
-		}).
-		otherwise({
-			redirectTo: '/login'
-		});
-}]);
+        		currentAuth: function(Authentication) {
+          			return Authentication.requireAuth();
+        		} //current Auth
+      		} //resolve
+		})
+		.state('bballnightroster', {
+			url: '/bballnight/:bballnightId/roster',
+			templateUrl: 'views/roster.html',
+			controller: 'RosterController'
+		})
+		.state('bballnights', {
+			url: '/bballnights',
+			templateUrl: 'views/bballnights.html',
+			controller: 'BballnightsController'
+		})
+		.state('about', {
+			url: '/about',
+			templateUrl: 'views/about.html'
+		})
+		.state('contact', {
+			url: '/contact',
+			templateUrl: 'views/contact.html'
+		})
 
-app.controller('FirstController', function($scope, $firebaseObject, $firebaseArray){
-	
-});
+	}
+]);

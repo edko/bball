@@ -1,11 +1,11 @@
 // get roster list for the night
 // add/delete current user to the roster
 
-app.controller('RosterController', ['$scope', '$rootScope', '$firebaseArray', '$firebaseObject', '$routeParams',
-	function($scope, $rootScope, $firebaseArray, $firebaseObject, $routeParams){
+app.controller('RosterController', ['$scope', '$rootScope', '$firebaseArray', '$firebaseObject', '$stateParams',
+	function($scope, $rootScope, $firebaseArray, $firebaseObject, $stateParams){
 
 
-		$scope.whichBballNight = $routeParams.bballnightId;
+		$scope.whichBballNight = $stateParams.bballnightId;
 
 		var rosterRef = firebase.database().ref().child('roster').child($scope.whichBballNight);
 		var waitlistRef = firebase.database().ref().child('waitlist').child($scope.whichBballNight);

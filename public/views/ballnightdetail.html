@@ -1,0 +1,7 @@
+<span class="badge">{{ rostercount }} in roster</span>
+<span class="badge" ng-show="waitlistcount>0">{{ waitlistcount }} in waitlist </span>	
+
+<!-- <span class="label label-primary" style="margin:0 5px 5px; display:inline-block; font-weight: normal; font-size: 16px;" ng-repeat="player in rosterlist | orderBy: 'date'">{{ player.first_name }} {{ player.last_name }}</span>
+ -->
+<button ng-show="showCheckInButton()">Check In</button>
+<button>Check Out</button>

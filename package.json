@@ -14,5 +14,9 @@
   "bugs": {
     "url": "https://github.com/edko/bball/issues"
   },
-  "homepage": "https://github.com/edko/bball#readme"
+  "homepage": "https://github.com/edko/bball#readme",
+  "dependencies": {
+    "angular-ui-router": "^0.3.2",
+    "angularfire": "^2.2.0"
+  }
 }
