@@ -18,5 +18,9 @@
   "dependencies": {
     "angular-ui-router": "^0.3.2",
     "angularfire": "^2.2.0"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-concat": "^2.6.1"
   }
 }

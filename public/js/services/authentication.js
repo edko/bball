@@ -1,5 +1,5 @@
-app.factory('Authentication', ['$rootScope', '$firebaseAuth', '$firebaseObject', '$location',
-	function($rootScope, $firebaseAuth, $firebaseObject, $location){
+app.factory('Authentication', ['$rootScope', '$firebaseAuth', '$firebaseObject', '$state',
+	function($rootScope, $firebaseAuth, $firebaseObject, $state){
 		var auth = $firebaseAuth();
 		var ref = firebase.database().ref();
 
@@ -18,7 +18,7 @@ app.factory('Authentication', ['$rootScope', '$firebaseAuth', '$firebaseObject',
 			login: function(user){
 				auth.$signInWithEmailAndPassword(user.email, user.password).
 					then(function(regUser){
-						$location.path('/dash');
+						$state.go('dash');
 					}).catch(function(error){
 						$rootScope.message = error.message;
 					});
